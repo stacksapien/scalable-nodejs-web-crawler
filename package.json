@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/stacksapien/scalable-nodejs-web-crawler/issues"
   },
-  "homepage": "https://github.com/stacksapien/scalable-nodejs-web-crawler#readme"
+  "homepage": "https://github.com/stacksapien/scalable-nodejs-web-crawler#readme",
+  "dependencies": {
+    "kue": "^0.11.6",
+    "x-ray": "^2.3.4"
+  }
 }
