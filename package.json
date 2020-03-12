@@ -22,7 +22,11 @@
   },
   "homepage": "https://github.com/stacksapien/scalable-nodejs-web-crawler#readme",
   "dependencies": {
-    "kue": "^0.11.6",
+    
+    "bee-queue": "^1.2.3",
     "x-ray": "^2.3.4"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
   }
 }
