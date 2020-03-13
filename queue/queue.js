@@ -1,10 +1,14 @@
-const Queue = require('bee-queue');
-let utility = require('../utility/strings')
-let Urls = require('../models/urls');
-let webCrawler = require('../crawl/crawler.js')
+let Queue = require('bee-queue')
+    utility = require('../utility/strings'),
+    urlUtility = require('../utility/url'),
+    Urls = require('../models/urls'),
+    webCrawler = require('../crawl/crawler.js'),
+    { v4 : uuidv4 } = require('uuid');
 
-function startCrawling(url, queueName, domain, path) {
-  const queue = new Queue(queueName);
+function startCrawling(url, path) {
+  let domain = urlUtility.getDomain(url);
+
+  const queue = new Queue(uuidv4());
   let urls = new Urls();
   urls.addToValidUrlSet(url);
   createJob(url, queue, urls, domain, path);
@@ -13,8 +17,6 @@ function startCrawling(url, queueName, domain, path) {
     
     webCrawler.crawl(job.data.url)
       .then((links) => {
-        console.log(links);
-        
         done(null, links);
       })
       .catch((err) => {
@@ -34,8 +36,11 @@ function createJob(url, queue, urls, domain, path) {
       if (utility.isContains(link, domain)) {
         // Check if it's already in Valid URL Set
         if (!urls.isContains(urls.getValidUrlSet(),link)) {
+          
+          console.log("( Valid Link ) ", link)
+
           // create the job
-          createJob(link, queue, urls, domain);
+          createJob(link, queue, urls, domain)
           utility.writeToFile(`${path}/valid-urls.txt`, `${link}\n`, 'utf8')
           
         }
@@ -45,7 +50,7 @@ function createJob(url, queue, urls, domain, path) {
         // It's a external link
        
         if (!urls.isContains(urls.getExternalUrlSet(),link)) {
-          
+          console.log("( External Link ) ", link)
           utility.writeToFile(`${path}/external-urls.txt`, `${link}\n`, 'utf8')
           
         }
@@ -56,9 +61,12 @@ function createJob(url, queue, urls, domain, path) {
   });
 
   job.on('failed', (err) => {
-    if (!urls.isContains(urls.getInvalidUrlSet()).has(job.data.url)) {
+    if (!urls.isContains(urls.getInvalidUrlSet(), job.data.url)) {
       // create the job
       urls.addToInvalidUrlSet(job.data.url);
+
+      console.log("( Invalid Url ) ", link)
+
       utility.writeToFile(`${path}/invalid-urls.txt`, `${job.data.url}\n`, 'utf8')
 
     }
@@ -70,9 +78,7 @@ function createJob(url, queue, urls, domain, path) {
   });
 }
 
-
-
-startCrawling("https://stacksapien.com",'Violent', "https://stacksapien.com",'..')
+module.exports = startCrawling;
 
 
 

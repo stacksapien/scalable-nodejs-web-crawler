@@ -1,11 +1,9 @@
-var utility = require('../utility/strings')
-var Xray = require('x-ray')
-var x = Xray()
+let utility = require('../utility/strings'),
+    Xray = require('x-ray'),
+    x = Xray();
 
-
-// valid-url set
-// external-url set
-// invalid-url set
+// crawl function takes url in parameter and return values of attribute
+// 'href' from all anchor tags
 exports.crawl = function (url) {
     return new Promise((resolve, reject) => {
         x(url, {

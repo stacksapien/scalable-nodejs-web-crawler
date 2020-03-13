@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/stacksapien/scalable-nodejs-web-crawler#readme",
   "dependencies": {
-    
     "bee-queue": "^1.2.3",
+    "uuid": "^7.0.2",
     "x-ray": "^2.3.4"
   },
   "devDependencies": {
