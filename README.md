@@ -1,6 +1,6 @@
 # Scalable-NodeJS-Web-Crawler
 
-A NodeJS based web-Crawler which can scaled on the go.
+A NodeJS based web-Crawler which can scale on the go!
 
   - Support both Static & Dynamic Page Crawling
 
