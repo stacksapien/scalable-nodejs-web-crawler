@@ -6,7 +6,7 @@ A NodeJS based web-Crawler which can scale on the go!
 
 ## Pre-requisite:
 
-  - Linux
+  - Linux (Ubuntu)
   - Redis
   - Nodejs
 
