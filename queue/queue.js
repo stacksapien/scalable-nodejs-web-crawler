@@ -6,6 +6,7 @@ let Queue = require('bee-queue')
     { v4 : uuidv4 } = require('uuid');
 
 function startCrawling(url, path) {
+  
   let domain = urlUtility.getDomain(url);
 
   const queue = new Queue(uuidv4());
@@ -40,7 +41,7 @@ function createJob(url, queue, urls, domain, path) {
           console.log("( Valid Link ) ", link)
 
           // create the job
-          createJob(link, queue, urls, domain)
+          createJob(link, queue, urls, domain, path)
           utility.writeToFile(`${path}/valid-urls.txt`, `${link}\n`, 'utf8')
           
         }
