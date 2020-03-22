@@ -10,3 +10,20 @@ exports.getDomain = function(passedUrl){
     parsedDomain += host;
     return parsedDomain;
 }
+exports.getHostName = function(host){
+
+    var hostSplit = host.split(".");
+
+    if(hostSplit.length == 1){
+
+        return hostSplit[0]
+    }
+    else if( hostSplit.length == 2){
+
+        return hostSplit[0]
+    }
+    else {
+        
+        return hostSplit[1]
+    }
+}
