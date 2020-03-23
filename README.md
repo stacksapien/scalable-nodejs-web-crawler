@@ -11,22 +11,19 @@ A NodeJS based web-Crawler which can scale on the go!
   - Nodejs
 
 ## Installation:
-  - Install `NodeJS` by executing the below command in root directory of project: 
-    ```sh
-        $ cd init-scripts/
-        $ sudo bash install-nodejs.sh
-    ```
-  - Install `Redis` 
-    ```sh
-        $ sudo bash install-redis.sh
-    ```
-  - Install project dependencies. In root directory of the project execute the following command: 
+  - Install project dependencies. In the root directory of the project execute the following command:
     ```sh
         $ npm install
     ```
 ## Usage:
+  - First run the test using : `npm test`
 ```sh
-    $ node index.js "<url>" "path-to-store-url"
-    $ node index.js "https://stacksapien.com" "./temp"
+    $ npm start
 ```
- - In Above Example, Files like `valid-urls.txt`, `external-urls.txt` & `invalid-urls.txt` will be generated in `temp` folder of your git project directory.
+ - In Above Example, A web-server will be hosted on port `3000`. Visit: https://127.0.0.1:3000.
+ - To test URL crawling, Do POST Request on `http://127.0.0.1:3000/api/getLinks` with JSON request as given below :
+ ```
+    {
+	    "urls" : ["http://your-url-com" ]
+    }
+ ```
